@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/">
+        <file>BuyItemPage.qml</file>
+        <file>HistoricPage.qml</file>
+        <file>main.qml</file>
+        <file>MainPage.qml</file>
+        <file>ParameterPage.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>resources/settings.png</file>
+        <file>resources/history.png</file>
+        <file>resources/home.png</file>
+        <file>resources/param.png</file>
+        <file>resources/search.png</file>
+        <file>resources/clear.png</file>
+        <file>resources/param1.jpeg</file>
+        <file>resources/param2.jpeg</file>
+        <file>resources/param3.jpeg</file>
+        <file>FactureModel.qml</file>
+        <file>resources/receipt.png</file>
+    </qresource>
+</RCC>
