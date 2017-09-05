@@ -4,9 +4,9 @@ ProjectK is a porject that will be useful when launching a company ...
 An image is way more explicit than a paragraph
 
 <p align="center">
-  <img src="showcase/normal_disp.png"              width="350"/>
-  <img src="showcase/searching_disp.png"           width="350"/>
-  <img src="showcase/searching_validated_disp.png" width="350"/>
+  <img src="showcase/normal_disp.png"              width="200"/>
+  <img src="showcase/searching_disp.png"           width="200"/>
+  <img src="showcase/searching_validated_disp.png" width="200"/>
 </p>
 
 # To support
