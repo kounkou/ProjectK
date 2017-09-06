@@ -17,5 +17,6 @@
         <file alias="param2.jpeg">resources/images/param2.jpeg</file>
         <file alias="param3.jpeg">resources/images/param3.jpeg</file>
         <file alias="receipt.png">resources/images/receipt.png</file>
+        <file alias="shopping_basket.png">resources/images/shopping_basket.png</file>
     </qresource>
 </RCC>

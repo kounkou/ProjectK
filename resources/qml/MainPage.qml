@@ -1,7 +1,7 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.1
 
 Item {
     Rectangle {
@@ -69,6 +69,17 @@ Item {
         }
     }
 
+    Popup {
+        id: popup
+        x: (parent.width - width) / 2
+        y: (parent.height - height) / 2
+        width: parent.width - 40
+        height: parent.height / 2
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnPressOutside
+    }
+
     Component {
         id: itemModelDelegate
 
@@ -91,6 +102,13 @@ Item {
                     anchors.centerIn: parent
                     running: objectImg.status === Image.Loading ||
                              objectImg.status === Image.Error
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        popup.open();
+                    }
                 }
             }
 
@@ -139,6 +157,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
 
         ListView {
+            id: listviewElt
             width: 180;
             height: parent.height - 30
             spacing: 2
