@@ -41,7 +41,8 @@ HEADERS += inc/Utils.h \
     inc/Application.h \
     inc/DataProvider.h \
     inc/IDataProvider.h \
-    inc/FilterProxyModel.h
+    inc/FilterProxyModel.h \
+    inc/Logging.h
 
 DISTFILES += \
     android/AndroidManifest.xml \

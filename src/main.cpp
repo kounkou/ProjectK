@@ -1,18 +1,18 @@
-// Copyright (c) 2017 godbod, All rights reserved. 
+/// Copyright (c) 2017 godbod, All rights reserved.
 
 ////////////////////////////////////////////////////////////////////////////////
-// FILE Template.h
-//  
-// DESCRIPTION
-// This is the main file implementation 
-//
-//
-// DESIGN DOCUMENTS
-// none 
-//
-// DATE          BY                         Issue #      REMARKS
-// 09-Sept-2017  Godfrain Jacques KOUNKOU   N/A          Initial release
-//
+/// FILE main.cpp
+///
+/// DESCRIPTION
+/// This is the main file implementation
+///
+///
+/// DESIGN DOCUMENTS
+/// none
+///
+/// DATE          BY                         Issue #      REMARKS
+/// 09-Sept-2017  Godfrain Jacques KOUNKOU   N/A          Initial release
+///
 ////////////////////////////////////////////////////////////////////////////////
 
 #include <QGuiApplication>
@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
     context->setContextProperty("filterModel", &filterModel);
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();
 }

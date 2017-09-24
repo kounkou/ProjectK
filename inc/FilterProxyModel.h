@@ -24,7 +24,7 @@ namespace amz {
         FilterProxyModel(QObject* parent = 0);
        ~FilterProxyModel();
 
-        Q_INVOKABLE void setFilterString(QString string);
+        Q_INVOKABLE void setFilterString(const QString &string);
         Q_INVOKABLE void setSortOrder(bool checked);
     };
 }

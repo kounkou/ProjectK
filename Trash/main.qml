@@ -1,42 +1,38 @@
-/// Copyright (c) 2017 godbod, All rights reserved.
+// Copyright (c) 2017 godbod, All rights reserved.
 
 ////////////////////////////////////////////////////////////////////////////////
-/// FILE main.qml
-///
-/// DESCRIPTION
-/// main.qml is intended to act as an aggregator to all others QML files.
-/// This mean all others qml shall be constructed with pair
-/// qml and ui.qml Systems
-///
-/// DESIGN DOCUMENTS
-/// none
-///
-/// DATE          BY                         Issue #      REMARKS
-/// 09-Sept-2017  Godfrain Jacques KOUNKOU   N/A          Initial release
-///
+// FILE ParametersPageForm.qml
+//
+// DESCRIPTION
+// This page is the parameter page for the application
+//
+//
+// DESIGN DOCUMENTS
+// none
+//
+// DATE          BY                         Issue #      REMARKS
+// 23-Sept-2017  Godfrain Jacques KOUNKOU   N/A          Initial release
+//
 ////////////////////////////////////////////////////////////////////////////////
 
 import QtQuick 2.7
 import QtQuick.Controls 2.0
+import QtQuick.Layouts 1.0
 
 ApplicationWindow {
-    id: window
     visible: true
-    width: 360
+    width: 380
     height: 620
-    title: qsTr("ProjectK")
+    title: qsTr("")
 
     SwipeView {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        // This is the main page
-        MainPage {
-        }
-
-        // HistoricPage   {}
-        // ParametersPage {}
+        MainPage       {}
+        HistoricPage   {}
+        ParametersPage {}
     }
 
     footer: TabBar {
@@ -52,7 +48,7 @@ ApplicationWindow {
                 width: historicButton.width - 20;
                 height: historicButton.height - 20;
                 fillMode: Image.PreserveAspectFit;
-                source: "qrc:/images/home.png";
+                source: "qrc:/home.png";
             }
         }
         TabButton {
@@ -64,7 +60,7 @@ ApplicationWindow {
                 width: historicButton.width - 20;
                 height: historicButton.height - 20;
                 fillMode: Image.PreserveAspectFit;
-                source: "qrc:/images/history.png";
+                source: "qrc:/history.png";
             }
         }
         TabButton {
@@ -76,7 +72,7 @@ ApplicationWindow {
                 width: settingsButton.width - 20;
                 height: settingsButton.height - 20;
                 fillMode: Image.PreserveAspectFit;
-                source: "qrc:/images/settings.png";
+                source: "qrc:/settings.png";
             }
         }
     }

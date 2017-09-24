@@ -26,6 +26,9 @@ namespace amz {
         PriceRole       = Qt::UserRole + 4,
         DescriptionRole = Qt::UserRole + 5
     };
+
+    // macro for logging the function
+
 }
 
 #endif // UTILS_H

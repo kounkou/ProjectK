@@ -1,37 +1,52 @@
-// <ItemsModel.cpp> -*- C++ -*-
+/// Copyright (c) 2017 godbod, All rights reserved.
 
-// Copyright (C) 2017
-
-/** @file ItemsModel.cpp
- */
+////////////////////////////////////////////////////////////////////////////////
+/// FILE ItemsModel.cpp
+///
+/// DESCRIPTION
+/// This ItemModel file
+///
+///
+/// DESIGN DOCUMENTS
+/// none
+///
+/// DATE          BY                         Issue #      REMARKS
+/// 09-Sept-2017  Godfrain Jacques KOUNKOU   N/A          Initial release
+///
+////////////////////////////////////////////////////////////////////////////////
 
 #include "ItemsModel.h"
 #include <QAbstractListModel>
+#include "Logging.h"
 
 namespace amz {
 
-    /**
-     * @brief ItemsModel::ItemsModel
-     */
-    ItemsModel::ItemsModel() {
+    ///
+    /// @brief constructor
+    ItemsModel::ItemsModel()
+    {
+        LOG_ENTEREXIT
     }
 
-    /**
-     * @brief ItemsModel::~ItemsModel
-     */
-    ItemsModel::~ItemsModel() {
+    ///
+    /// @brief destructor
+    ItemsModel::~ItemsModel()
+    {
+        LOG_ENTEREXIT
     }
 
-    /**
-     * @brief ItemsModel::addData
-     * @param unit
-     * @param quantity
-     * @param picture
-     * @param price
-     * @param description
-     */
+    ///
+    /// @brief ItemsModel::addData
+    /// @param unit
+    /// @param quantity
+    /// @param picture
+    /// @param price
+    /// @param description
     void ItemsModel::addData(const QString &unit, const QString &quantity, const QString &picture,
-                             const QString &price, const QString &description) {
+                             const QString &price, const QString &description)
+    {
+        LOG_ENTEREXIT
+
         beginInsertRows(QModelIndex(), rowCount(), rowCount());
         m_names.append(unit);
         m_quantity.append(quantity);
@@ -41,12 +56,14 @@ namespace amz {
         endInsertRows();
     }
 
-    /**
-     * @brief ItemsModel::rowCount
-     * @param parent
-     * @return
-     */
-    int ItemsModel::rowCount(const QModelIndex &parent) const {
+    ///
+    /// @brief  ItemsModel::rowCount
+    /// @param  parent
+    /// @return the number of rows
+    int ItemsModel::rowCount(const QModelIndex &parent) const
+    {
+        LOG_ENTEREXIT
+
         Q_UNUSED(parent);
         return m_names.count();
     }
@@ -57,7 +74,10 @@ namespace amz {
      * @param role
      * @return Qvariant
      */
-    QVariant ItemsModel::data(const QModelIndex &index, int role) const {
+    QVariant ItemsModel::data(const QModelIndex &index, int role) const
+    {
+        LOG_ENTEREXIT
+
         if (index.row() < 0 || index.row() >= m_names.count())
             return QVariant();
 
@@ -80,7 +100,10 @@ namespace amz {
      * @brief ItemsModel::roleNames
      * @return a QHash<int, QByteArray>
      */
-    QHash<int, QByteArray> ItemsModel::roleNames() const {
+    QHash<int, QByteArray> ItemsModel::roleNames() const
+    {
+        LOG_ENTEREXIT
+
         QHash<int, QByteArray> roles;
         roles[NameRole]        = "name";
         roles[QuantityRole]    = "quantity";

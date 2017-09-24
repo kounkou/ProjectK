@@ -1,12 +1,10 @@
 /// Copyright (c) 2017 godbod, All rights reserved.
 
 ////////////////////////////////////////////////////////////////////////////////
-/// FILE MainPage.qml
+/// FILE Search.qml
 ///
 /// DESCRIPTION
-/// MainPage.qml is the first page of the application displaying
-/// the different items. The form page represent the controller part
-/// of the qml page
+/// Search.qml is the controller part of the qml User Interface showing the search bar
 ///
 /// DESIGN DOCUMENTS
 /// none
@@ -18,6 +16,14 @@
 
 import QtQuick 2.4
 
-MainPageForm {
-    // nothing to do for now
+SearchForm {
+    // Call back for the search input
+    inputSearch.onTextChanged: {
+        filterModel.setFilterString(inputText.text);
+    }
+
+    clearSearch.onClicked: {
+        console.log("clicked on the clear button")
+        inputText.text = ""
+    }
 }
