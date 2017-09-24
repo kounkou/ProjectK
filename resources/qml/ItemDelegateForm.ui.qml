@@ -33,6 +33,7 @@ Rectangle {
         fillMode: Image.PreserveAspectCrop
 
         BusyIndicator {
+            id: loadIndicator
             anchors.centerIn: parent
             running: objectImg.status === Image.Loading ||
                      objectImg.status === Image.Error
@@ -41,6 +42,28 @@ Rectangle {
         MouseArea {
             id: imageArea
             anchors.fill: parent
+        }
+
+        Rectangle {
+            id: priceEl
+            anchors.bottom: parent.bottom
+            anchors.right: parent.right
+            anchors.bottomMargin: 5
+            anchors.rightMargin: 5
+            height: 30
+            width: parent.width / 4
+            radius: 10
+
+            // The text makes no sense if the image isn't loaded
+            // so we tet the running state before setting the price
+            Text {
+                anchors.centerIn: parent
+                text: loadIndicator.running ? "" : price
+                smooth: true
+                font.pointSize: 15
+                color: "grey"
+                font.bold: true
+            }
         }
     }
 }
