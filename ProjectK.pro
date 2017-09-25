@@ -1,4 +1,4 @@
-QT += qml quick
+QT += qml quick sql
 
 CONFIG += c++11
 
@@ -7,7 +7,8 @@ SOURCES += src/main.cpp \
     src/ItemsModel.cpp \
     src/Application.cpp \
     src/DataProvider.cpp \
-    src/FilterProxyModel.cpp
+    src/FilterProxyModel.cpp \
+    src/SqlQueryModel.cpp
 
 RESOURCES += qml.qrc
 
@@ -42,7 +43,8 @@ HEADERS += inc/Utils.h \
     inc/DataProvider.h \
     inc/IDataProvider.h \
     inc/FilterProxyModel.h \
-    inc/Logging.h
+    inc/Logging.h \
+    inc/SqlQueryModel.h
 
 DISTFILES += \
     android/AndroidManifest.xml \

@@ -68,12 +68,11 @@ namespace amz {
         return m_names.count();
     }
 
-    /**
-     * @brief ItemsModel::data
-     * @param index
-     * @param role
-     * @return Qvariant
-     */
+    ///
+    /// @brief ItemsModel::data
+    /// @param index
+    /// @param role
+    /// @return Qvariant
     QVariant ItemsModel::data(const QModelIndex &index, int role) const
     {
         LOG_ENTEREXIT
@@ -96,10 +95,9 @@ namespace amz {
         return QVariant();
     }
 
-    /**
-     * @brief ItemsModel::roleNames
-     * @return a QHash<int, QByteArray>
-     */
+    ///
+    /// @brief ItemsModel::roleNames
+    /// @return a QHash<int, QByteArray>
     QHash<int, QByteArray> ItemsModel::roleNames() const
     {
         LOG_ENTEREXIT

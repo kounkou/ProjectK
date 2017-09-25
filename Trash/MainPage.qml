@@ -82,7 +82,12 @@ Item {
                 running: true
                 onTriggered: {
                     objectImg.source = "";
-                    objectImg.source = picture
+                    objectImg.source = 
+
+
+
+
+
                 }
             }
 
