@@ -17,13 +17,14 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.1
 
-Rectangle {
+Pane {
 
     id: itemModelDelegate
 
     // This property holds the item image
     property alias objectImg : objectImg
     property alias imageArea : imageArea
+    property alias itemPrice : itemPrice
 
     Image {
         id: objectImg
@@ -57,6 +58,7 @@ Rectangle {
             // The text makes no sense if the image isn't loaded
             // so we tet the running state before setting the price
             Text {
+                id: itemPrice
                 anchors.centerIn: parent
                 text: loadIndicator.running ? "" : price
                 smooth: true

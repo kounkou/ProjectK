@@ -25,12 +25,15 @@ Rectangle {
     property alias inputText  : input
 
     border.color: "lightgrey"
-    radius: 15
+    radius: 10
     clip: true
 
     Text {
         id: hint
-        anchors { fill: parent; leftMargin: 14 }
+        anchors {
+            fill: parent;
+            leftMargin: 14;
+        }
         verticalAlignment: Text.AlignVCenter
         text: "search..."
         font.pixelSize: 18
@@ -54,7 +57,7 @@ Rectangle {
         verticalAlignment: Text.AlignVCenter
         font.pixelSize: 18
         color: "#707070"
-        validator: RegExpValidator { regExp: /^[0-9A-Za-z ]{0,30}$/ }
+        validator: RegExpValidator { regExp: /^[0-9A-Za-z ]{0,23}$/ }
     }
 
     Image {

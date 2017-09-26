@@ -1,5 +1,7 @@
 QT += qml quick sql
 
+QTPLUGIN += qsqlmysql
+
 CONFIG += c++11
 
 SOURCES += src/main.cpp \

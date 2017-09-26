@@ -36,4 +36,6 @@ ItemDelegateForm {
                     "\nprice : " + price   +
                     "\nqty   : " + quantity);
     }
+
+
 }

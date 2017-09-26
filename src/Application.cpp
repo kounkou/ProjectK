@@ -40,7 +40,8 @@ namespace amz {
     /// FUNCTION Application::init
     ///
     /// DESCRIPTION
-    /// init function.
+    /// init function. The init function will download
+    /// a database of items.
     ///
     /// RETURN
     /// The init status

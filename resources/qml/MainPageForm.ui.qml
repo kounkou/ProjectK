@@ -23,8 +23,12 @@ Rectangle {
     ListView {
         id: listviewElt
         anchors.fill: parent
-        spacing: 2
+        anchors {
+            topMargin: 50
+            top : search.bottom
+        }
 
+        // spacing: 2
         // snapMode: ListView.SnapToItem
         headerPositioning: ListView.PullBackHeader
 
@@ -39,13 +43,14 @@ Rectangle {
     // QML issue when searching inside the model
     // so I keep that here for now
     Search {
-        width: window.width - 20
+        id: search
+        // width: window.width - 20
         height: window.height/16
         anchors {
             left: parent.left
-            leftMargin: 10
+            leftMargin: 40
             right: parent.right
-            rightMargin: 10
+            rightMargin: 40
             top : parent.top
             topMargin: 10
         }
