@@ -25,14 +25,17 @@ ApplicationWindow {
     width: 360
     height: 620
     title: qsTr("ProjectK")
+    color: "transparent"
 
     SwipeView {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        // This is the main page
-        MainPage {
+        // This is the state manager instance
+        // It will control all others instanciation
+        StatesManager {
+            id: stateManager
         }
 
         // HistoricPage   {}

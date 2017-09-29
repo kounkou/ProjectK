@@ -15,6 +15,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import QtQuick 2.4
+import QtQuick.Controls 2.1
 
 ItemDelegateForm {
 
@@ -31,11 +32,6 @@ ItemDelegateForm {
 
     // my image callback to proceed for further details
     imageArea.onClicked: {
-        console.log("\nImage : " + picture +
-                    "\nname  : " + name    +
-                    "\nprice : " + price   +
-                    "\nqty   : " + quantity);
+        stateManager.state = "DETAIL"
     }
-
-
 }
