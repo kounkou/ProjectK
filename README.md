@@ -1,7 +1,6 @@
 # ProjectK
 
-ProjectK is a porject that will be useful when launching a company ...
-An image is way more explicit than a paragraph
+An image is way more explicit than a paragraph... ;-)
 
 <p align="center">
   <img src="showcase/normal_disp.png"              width="200"/>
