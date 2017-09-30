@@ -20,13 +20,32 @@ Rectangle {
     Rectangle {
         id: details
 
-        color: "grey"
         anchors {
             bottom: goBack.top
             top: parent.top
             left: parent.left
             right: parent.right
             margins: 10
+        }
+
+        Image {
+            id: objectImg
+            anchors.fill: parent
+            anchors.centerIn: parent
+            source: stateManager.currentImage
+            fillMode: Image.PreserveAspectFit
+
+            BusyIndicator {
+                id: loadIndicator
+                anchors.centerIn: parent
+                running: objectImg.status === Image.Loading ||
+                         objectImg.status === Image.Error
+            }
+
+            MouseArea {
+                id: imageArea
+                anchors.fill: parent
+            }
         }
     }
 }

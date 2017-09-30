@@ -1,0 +1,374 @@
+From f6cad17e7371c99c4af9bfd529d919046f5e057b Mon Sep 17 00:00:00 2001
+From: godbod <gkounkou@gmail.com>
+Date: Sat, 30 Sep 2017 00:56:38 +0200
+Subject: [PATCH] Solved the request to detailed view problem by creating a
+ state manager and updating the current state accordingly
+
+---
+ ProjectK.pro.user                    |  2 +-
+ qml.qrc                              |  7 +++--
+ resources/qml/ItemDelegate.qml       |  8 ++---
+ resources/qml/ItemDetails.qml        |  9 ++++++
+ resources/qml/ItemDetailsForm.ui.qml | 32 ++++++++++++++++++++
+ resources/qml/ItemsNormal.qml        |  4 +++
+ resources/qml/ItemsNormalForm.ui.qml | 40 +++++++++++++++++++++++++
+ resources/qml/MainPage.qml           | 23 --------------
+ resources/qml/MainPageForm.ui.qml    | 58 ------------------------------------
+ resources/qml/StatesManager.qml      | 54 +++++++++++++++++++++++++++++++++
+ resources/qml/main.qml               |  7 +++--
+ 11 files changed, 152 insertions(+), 92 deletions(-)
+ create mode 100644 resources/qml/ItemDetails.qml
+ create mode 100644 resources/qml/ItemDetailsForm.ui.qml
+ create mode 100644 resources/qml/ItemsNormal.qml
+ create mode 100644 resources/qml/ItemsNormalForm.ui.qml
+ delete mode 100644 resources/qml/MainPage.qml
+ delete mode 100644 resources/qml/MainPageForm.ui.qml
+ create mode 100644 resources/qml/StatesManager.qml
+
+diff --git a/ProjectK.pro.user b/ProjectK.pro.user
+index d034473..bbaf686 100644
+--- a/ProjectK.pro.user
++++ b/ProjectK.pro.user
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE QtCreatorProject>
+-<!-- Written by QtCreator 4.2.1, 2017-09-24T21:42:54. -->
++<!-- Written by QtCreator 4.2.1, 2017-09-30T00:17:13. -->
+ <qtcreator>
+  <data>
+   <variable>EnvironmentId</variable>
+diff --git a/qml.qrc b/qml.qrc
+index be76c63..11e66ec 100644
+--- a/qml.qrc
++++ b/qml.qrc
+@@ -8,11 +8,14 @@
+         <file alias="images/search.png">resources/images/search.png</file>
+         <file alias="images/clear.png">resources/images/clear.png</file>
+         <file alias="qml/main.qml">resources/qml/main.qml</file>
+-        <file alias="qml/MainPage.qml">resources/qml/MainPage.qml</file>
+-        <file alias="qml/MainPageForm.ui.qml">resources/qml/MainPageForm.ui.qml</file>
++        <file alias="qml/StatesManager.qml">resources/qml/StatesManager.qml</file>
+         <file alias="qml/ItemDelegate.qml">resources/qml/ItemDelegate.qml</file>
+         <file alias="qml/ItemDelegateForm.ui.qml">resources/qml/ItemDelegateForm.ui.qml</file>
+         <file alias="qml/Search.qml">resources/qml/Search.qml</file>
+         <file alias="qml/SearchForm.ui.qml">resources/qml/SearchForm.ui.qml</file>
++        <file alias="qml/ItemDetails.qml">resources/qml/ItemDetails.qml</file>
++        <file alias="qml/ItemDetailsForm.ui.qml">resources/qml/ItemDetailsForm.ui.qml</file>
++        <file alias="qml/ItemsNormal.qml">resources/qml/ItemsNormal.qml</file>
++        <file alias="qml/ItemsNormalForm.ui.qml">resources/qml/ItemsNormalForm.ui.qml</file>
+     </qresource>
+ </RCC>
+diff --git a/resources/qml/ItemDelegate.qml b/resources/qml/ItemDelegate.qml
+index e340802..73e7d50 100644
+--- a/resources/qml/ItemDelegate.qml
++++ b/resources/qml/ItemDelegate.qml
+@@ -15,6 +15,7 @@
+ ////////////////////////////////////////////////////////////////////////////////
+ 
+ import QtQuick 2.4
++import QtQuick.Controls 2.1
+ 
+ ItemDelegateForm {
+ 
+@@ -31,11 +32,6 @@ ItemDelegateForm {
+ 
+     // my image callback to proceed for further details
+     imageArea.onClicked: {
+-        console.log("\nImage : " + picture +
+-                    "\nname  : " + name    +
+-                    "\nprice : " + price   +
+-                    "\nqty   : " + quantity);
++        stateManager.state = "DETAIL"
+     }
+-
+-
+ }
+diff --git a/resources/qml/ItemDetails.qml b/resources/qml/ItemDetails.qml
+new file mode 100644
+index 0000000..e8d3037
+--- /dev/null
++++ b/resources/qml/ItemDetails.qml
+@@ -0,0 +1,9 @@
++import QtQuick 2.4
++
++ItemDetailsForm {
++
++    // This is the call back to go back to previous screen
++    goBack.onClicked: {
++        stateManager.state = "NORMAL"
++    }
++}
+diff --git a/resources/qml/ItemDetailsForm.ui.qml b/resources/qml/ItemDetailsForm.ui.qml
+new file mode 100644
+index 0000000..60b8b52
+--- /dev/null
++++ b/resources/qml/ItemDetailsForm.ui.qml
+@@ -0,0 +1,32 @@
++import QtQuick 2.4
++import QtQuick.Controls 2.1
++
++Rectangle {
++    height: 400
++    width : 400
++
++    property alias goBack: goBack
++
++    Button {
++        id: goBack
++        text: qsTr("go back")
++        anchors {
++            bottom: parent.bottom
++            horizontalCenter: parent.horizontalCenter
++            margins: 10
++        }
++    }
++
++    Rectangle {
++        id: details
++
++        color: "grey"
++        anchors {
++            bottom: goBack.top
++            top: parent.top
++            left: parent.left
++            right: parent.right
++            margins: 10
++        }
++    }
++}
+diff --git a/resources/qml/ItemsNormal.qml b/resources/qml/ItemsNormal.qml
+new file mode 100644
+index 0000000..fcfa3da
+--- /dev/null
++++ b/resources/qml/ItemsNormal.qml
+@@ -0,0 +1,4 @@
++import QtQuick 2.4
++
++ItemsNormalForm {
++}
+diff --git a/resources/qml/ItemsNormalForm.ui.qml b/resources/qml/ItemsNormalForm.ui.qml
+new file mode 100644
+index 0000000..84c68c7
+--- /dev/null
++++ b/resources/qml/ItemsNormalForm.ui.qml
+@@ -0,0 +1,40 @@
++import QtQuick 2.4
++
++Rectangle {
++
++    id: listOfItems
++
++    ListView {
++        id: listviewElt
++        anchors.fill: parent
++        anchors {
++            topMargin: 50
++            top : search.bottom
++        }
++
++        headerPositioning: ListView.PullBackHeader
++
++        model: filterModel
++        delegate: ItemDelegate {
++            width : window.width
++            height: window.height/3
++        }
++    }
++
++    // Using header inside the listview causes some
++    // QML issue when searching inside the model
++    // so I keep that here for now
++    Search {
++        id: search
++
++        height: window.height/16
++        anchors {
++            left: parent.left
++            leftMargin: 40
++            right: parent.right
++            rightMargin: 40
++            top : parent.top
++            topMargin: 10
++        }
++    }
++}
+diff --git a/resources/qml/MainPage.qml b/resources/qml/MainPage.qml
+deleted file mode 100644
+index 3cee9d2..0000000
+--- a/resources/qml/MainPage.qml
++++ /dev/null
+@@ -1,23 +0,0 @@
+-/// Copyright (c) 2017 godbod, All rights reserved.
+-
+-////////////////////////////////////////////////////////////////////////////////
+-/// FILE MainPage.qml
+-///
+-/// DESCRIPTION
+-/// MainPage.qml is the first page of the application displaying
+-/// the different items. The form page represent the controller part
+-/// of the qml page
+-///
+-/// DESIGN DOCUMENTS
+-/// none
+-///
+-/// DATE          BY                         Issue #      REMARKS
+-/// 09-Sept-2017  Godfrain Jacques KOUNKOU   N/A          Initial release
+-///
+-////////////////////////////////////////////////////////////////////////////////
+-
+-import QtQuick 2.4
+-
+-MainPageForm {
+-    // nothing to do for now
+-}
+diff --git a/resources/qml/MainPageForm.ui.qml b/resources/qml/MainPageForm.ui.qml
+deleted file mode 100644
+index 8e05e4a..0000000
+--- a/resources/qml/MainPageForm.ui.qml
++++ /dev/null
+@@ -1,58 +0,0 @@
+-/// Copyright (c) 2017 godbod, All rights reserved.
+-
+-////////////////////////////////////////////////////////////////////////////////
+-/// FILE MainPage.qml
+-///
+-/// DESCRIPTION
+-/// MainPage.ui.qml is the first page of the application displaying
+-/// the different items. This is the full UI file
+-///
+-/// DESIGN DOCUMENTS
+-/// none
+-///
+-/// DATE          BY                         Issue #      REMARKS
+-/// 09-Sept-2017  Godfrain Jacques KOUNKOU   N/A          Initial release
+-///
+-////////////////////////////////////////////////////////////////////////////////
+-
+-import QtQuick 2.4
+-
+-Rectangle {
+-    id: listOfItems
+-
+-    ListView {
+-        id: listviewElt
+-        anchors.fill: parent
+-        anchors {
+-            topMargin: 50
+-            top : search.bottom
+-        }
+-
+-        // spacing: 2
+-        // snapMode: ListView.SnapToItem
+-        headerPositioning: ListView.PullBackHeader
+-
+-        model: filterModel
+-        delegate: ItemDelegate {
+-            width : window.width
+-            height: window.height/3
+-        }
+-    }
+-
+-    // Using header inside the listview causes some
+-    // QML issue when searching inside the model
+-    // so I keep that here for now
+-    Search {
+-        id: search
+-        // width: window.width - 20
+-        height: window.height/16
+-        anchors {
+-            left: parent.left
+-            leftMargin: 40
+-            right: parent.right
+-            rightMargin: 40
+-            top : parent.top
+-            topMargin: 10
+-        }
+-    }
+-}
+diff --git a/resources/qml/StatesManager.qml b/resources/qml/StatesManager.qml
+new file mode 100644
+index 0000000..1f6055d
+--- /dev/null
++++ b/resources/qml/StatesManager.qml
+@@ -0,0 +1,54 @@
++/// Copyright (c) 2017 godbod, All rights reserved.
++
++////////////////////////////////////////////////////////////////////////////////
++/// FILE MainPage.qml
++///
++/// DESCRIPTION
++/// MainPage.qml is the first page of the application displaying
++/// the different items. The form page represent the controller part
++/// of the qml page
++///
++/// DESIGN DOCUMENTS
++/// none
++///
++/// DATE          BY                         Issue #      REMARKS
++/// 09-Sept-2017  Godfrain Jacques KOUNKOU   N/A          Initial release
++///
++////////////////////////////////////////////////////////////////////////////////
++
++import QtQuick 2.4
++
++Item {
++    id: statesManager
++
++    state: "NORMAL"
++
++    // This is the files loader
++    Loader {
++        id: loader
++        anchors.fill: parent
++        visible: source != ""
++    }
++
++    // This is my connection
++    Connections {
++        target: loader.source != "" ? loader.item : null
++    }
++
++    states: [
++        State {
++            name: "NORMAL"
++            PropertyChanges {
++                target: loader
++                source: "ItemsNormal.qml"
++            }
++        },
++        State {
++            name: "DETAIL"
++            PropertyChanges {
++                target: loader
++                source: "ItemDetails.qml"
++            }
++        }
++    ]
++}
+diff --git a/resources/qml/main.qml b/resources/qml/main.qml
+index ea683f7..53b7708 100644
+--- a/resources/qml/main.qml
++++ b/resources/qml/main.qml
+@@ -25,14 +25,17 @@ ApplicationWindow {
+     width: 360
+     height: 620
+     title: qsTr("ProjectK")
++    color: "transparent"
+ 
+     SwipeView {
+         id: swipeView
+         anchors.fill: parent
+         currentIndex: tabBar.currentIndex
+ 
+-        // This is the main page
+-        MainPage {
++        // This is the state manager instance
++        // It will control all others instanciation
++        StatesManager {
++            id: stateManager
+         }
+ 
+         // HistoricPage   {}
+-- 
+2.7.4
+

@@ -21,7 +21,10 @@ import QtQuick 2.4
 Item {
     id: statesManager
 
+    // initial state for the statemanager
     state: "NORMAL"
+
+    property string currentImage: ""
 
     // This is the files loader
     Loader {
