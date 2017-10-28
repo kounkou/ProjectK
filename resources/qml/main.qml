@@ -27,6 +27,9 @@ ApplicationWindow {
     title: qsTr("ProjectK")
     color: "transparent"
 
+    SplashForm {
+    }
+
     SwipeView {
         id: swipeView
         anchors.fill: parent
@@ -37,14 +40,12 @@ ApplicationWindow {
         StatesManager {
             id: stateManager
         }
-
-        // HistoricPage   {}
-        // ParametersPage {}
     }
 
     footer: TabBar {
         id: tabBar
         currentIndex: swipeView.currentIndex
+        visible: stateManager.state == "SPLASH" ? false : true
 
         TabButton {
             id: homeButton;

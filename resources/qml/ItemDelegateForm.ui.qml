@@ -47,12 +47,14 @@ Pane {
 
         Rectangle {
             id: priceEl
-            anchors.bottom: parent.bottom
-            anchors.right: parent.right
-            anchors.bottomMargin: 5
-            anchors.rightMargin: 5
-            height: 30
-            width: parent.width / 4
+            anchors {
+                bottom: parent.bottom
+                right: parent.right
+                bottomMargin: 5
+                rightMargin: 5
+            }
+            height: itemPrice.height + 10
+            width : itemPrice.width  + 10
             radius: 10
 
             // The text makes no sense if the image isn't loaded

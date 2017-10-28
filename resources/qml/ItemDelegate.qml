@@ -32,7 +32,9 @@ ItemDelegateForm {
 
     // my image callback to proceed for further details
     imageArea.onClicked: {
-        stateManager.state = "DETAIL";
+        stateManager.state        = "DETAIL";
         stateManager.currentImage = picture;
+        stateManager.currentName  = name;
+        stateManager.currentBrief = description;
     }
 }

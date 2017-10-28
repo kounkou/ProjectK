@@ -22,9 +22,11 @@ Item {
     id: statesManager
 
     // initial state for the statemanager
-    state: "NORMAL"
+    state: "SPLASH"
 
     property string currentImage: ""
+    property string currentName : ""
+    property string currentBrief: ""
 
     // This is the files loader
     Loader {
@@ -39,6 +41,13 @@ Item {
     }
 
     states: [
+        State {
+            name: "SPLASH"
+            PropertyChanges {
+                target: loader
+                source: "Splash.qml"
+            }
+        },
         State {
             name: "NORMAL"
             PropertyChanges {

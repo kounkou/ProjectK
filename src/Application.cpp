@@ -33,7 +33,6 @@ namespace amz {
     : _dataProvider(&_ownedDataProvider)
     {
         LOG_ENTEREXIT;
-
     }
 
     ///////////////////////////////////////////////////
@@ -105,7 +104,6 @@ namespace amz {
     Application::~Application()
     {
         LOG_ENTEREXIT;
-
     }
 
     ///////////////////////////////////////////////////

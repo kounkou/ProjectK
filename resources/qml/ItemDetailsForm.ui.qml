@@ -1,51 +1,55 @@
 import QtQuick 2.4
 import QtQuick.Controls 2.1
+import QtQuick.Layouts 1.1
 
-Rectangle {
-    height: 400
-    width : 400
-
+Pane {
     property alias goBack: goBack
 
-    Button {
-        id: goBack
-        text: qsTr("go back")
+
+    ColumnLayout {
+        spacing: 10
+
         anchors {
-            bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
-            margins: 10
-        }
-    }
-
-    Rectangle {
-        id: details
-
-        anchors {
-            bottom: goBack.top
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            margins: 10
         }
 
         Image {
-            id: objectImg
-            anchors.fill: parent
-            anchors.centerIn: parent
+            id: imageItem
             source: stateManager.currentImage
-            fillMode: Image.PreserveAspectFit
+            sourceSize.width : window.width  / 2
+            sourceSize.height: window.height / 2
 
-            BusyIndicator {
-                id: loadIndicator
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Rectangle {
+            width : window.width  - 20
+            height: childrenRect.height
+            radius: 5
+            clip: true
+
+            Text {
+                id: descriptionText
+                text: stateManager.currentBrief
                 anchors.centerIn: parent
-                running: objectImg.status === Image.Loading ||
-                         objectImg.status === Image.Error
             }
 
-            MouseArea {
-                id: imageArea
-                anchors.fill: parent
+            anchors.bottom: goBack.top
+        }
+
+        Button {
+            id: goBack
+            Image {
+                id: settings;
+                opacity: 0.7;
+                anchors.centerIn: parent;
+                width : settingsButton.width / 2;
+                height: settingsButton.height / 2;
+                fillMode: Image.PreserveAspectFit;
+                source: "qrc:/images/back.png";
             }
+
+            anchors.bottom: page.bottom
         }
     }
 }
