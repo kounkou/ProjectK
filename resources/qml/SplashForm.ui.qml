@@ -37,13 +37,5 @@ Rectangle {
             color: "white"
             anchors.horizontalCenter: parent.horizontalCenter
         }
-
-        Text {
-            id: splashTextNewline
-            text: qsTr("we are connecting the dots")
-            font.pointSize: 10
-            color: "white"
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
     }
 }
