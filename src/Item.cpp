@@ -29,7 +29,9 @@ namespace amz {
         , _quantity(quantity)
         , _pictures(pictures)
         , _price(price)
-        , _description(description) {
+        , _description(description)
+    {
+
     }
 
     /**
@@ -37,7 +39,8 @@ namespace amz {
      * This function will describe out the current object
      * of interest to the user
      */
-    void Item::describe() const {
+    void Item::describe() const
+    {
         std::cout << "_name        : " << _name        <<
                      "_quantity    : " << _quantity    <<
                      "_price       : " << _price       <<
@@ -54,7 +57,8 @@ namespace amz {
      * @brief  Item::getName
      * @return std::string
      */
-    std::string Item::getName() const {
+    std::string Item::getName() const
+    {
         return _name;
     }
 
@@ -62,7 +66,8 @@ namespace amz {
      * @brief Item::getQuantity
      * @return std::size_t
      */
-    std::size_t Item::getQuantity() const {
+    std::size_t Item::getQuantity() const
+    {
         return _quantity;
     }
 
@@ -70,7 +75,8 @@ namespace amz {
      * @brief Item::getPictures
      * @return std::vector<std::string>
      */
-    std::vector<std::string> Item::getPictures() const {
+    std::vector<std::string> Item::getPictures() const
+    {
         return _pictures;
     }
 
@@ -78,7 +84,8 @@ namespace amz {
      * @brief Item::getPrice
      * @return Price
      */
-    Price Item::getPrice() const {
+    Price Item::getPrice() const
+    {
         return _price;
     }
 
@@ -86,7 +93,8 @@ namespace amz {
      * @brief Item::getDescription
      * @return std::string
      */
-    std::string Item::getDescription() const {
+    std::string Item::getDescription() const
+    {
         return _description;
     }
 
@@ -94,7 +102,8 @@ namespace amz {
      * @brief setName
      * @param name
      */
-    void Item::setName(std::string const& __name) {
+    void Item::setName(std::string const& __name)
+    {
         _name = __name;
     }
 
@@ -102,7 +111,8 @@ namespace amz {
      * @brief Item::setQuantity
      * @param quantity
      */
-    void Item::setQuantity(std::size_t const& __quantity) {
+    void Item::setQuantity(std::size_t const& __quantity)
+    {
         _quantity = __quantity;
     }
 
@@ -110,7 +120,8 @@ namespace amz {
      * @brief Item::setPictures
      * @param pictures
      */
-    void Item::setPictures(std::vector<std::string> const& __pictures) {
+    void Item::setPictures(std::vector<std::string> const& __pictures)
+    {
         _pictures = __pictures;
     }
 
@@ -118,7 +129,8 @@ namespace amz {
      * @brief Item::setPrice
      * @param price
      */
-    void Item::setPrice(Price const& __price) {
+    void Item::setPrice(Price const& __price)
+    {
         _price = __price;
     }
 
@@ -126,7 +138,8 @@ namespace amz {
      * @brief Item::setDescription
      * @param description
      */
-    void Item::setDescription(std::string const& __description) {
+    void Item::setDescription(std::string const& __description)
+    {
         _description = __description;
     }
 }

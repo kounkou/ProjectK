@@ -1,10 +1,10 @@
 /// Copyright (c) 2017 godbod, All rights reserved.
 
 ////////////////////////////////////////////////////////////////////////////////
-/// FILE Splash.qml
+/// FILE Login.qml
 ///
 /// DESCRIPTION
-/// Splash.qml is the Splashscreen part of the qml showed at boot
+/// Login.qml will provide us with the Login qml controller
 ///
 /// DESIGN DOCUMENTS
 /// none
@@ -15,16 +15,16 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 import QtQuick 2.4
+import QtQuick.Controls 2.1
 
-SplashForm {
+LoginForm {
 
-    property bool credentialExist: false
+    property bool connectionStatus: true
 
-    // For now a dummy timer is used
-    Timer {
-        interval   : 10000;
-        running    : true;
-        repeat     : false;
-        onTriggered: stateManager.state = credentialExist ? "NORMAL" : "LOGIN";
+    connection.onClicked: {
+        // Using invokable method here to authentify
+        // connect(login.text, password.text)
+
+        connectionStatus ? stateManager.state = "NORMAL" : stateManager.state = "LOGIN"
     }
 }

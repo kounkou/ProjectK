@@ -37,7 +37,7 @@ ApplicationWindow {
 
         // This is the state manager instance
         // It will control all others instanciation
-        StatesManager {
+        ApplicationScreen {
             id: stateManager
         }
     }
@@ -45,7 +45,7 @@ ApplicationWindow {
     footer: TabBar {
         id: tabBar
         currentIndex: swipeView.currentIndex
-        visible: stateManager.state == "SPLASH" ? false : true
+        visible: stateManager.state == "SPLASH" || stateManager.state == "LOGIN" ? false : true
 
         TabButton {
             id: homeButton;

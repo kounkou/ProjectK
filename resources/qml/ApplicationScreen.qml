@@ -49,6 +49,13 @@ Item {
             }
         },
         State {
+            name: "LOGIN"
+            PropertyChanges {
+                target: loader
+                source: "Login.qml"
+            }
+        },
+        State {
             name: "NORMAL"
             PropertyChanges {
                 target: loader
