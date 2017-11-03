@@ -21,10 +21,15 @@ LoginForm {
 
     property bool connectionStatus: true
 
+    // This part will delegate the login to C++ and react with UI when login fails
     connection.onClicked: {
         // Using invokable method here to authentify
-        // connect(login.text, password.text)
-
-        connectionStatus ? stateManager.state = "NORMAL" : stateManager.state = "LOGIN"
+        connectionStatus = model.loginUser(login.text, password.text)
+        console.log("connection status : " + connectionStatus)
+        if (connectionStatus) {
+            stateManager.state = "NORMAL"
+        } else {
+            stateManager.state = "LOGIN"
+        }
     }
 }

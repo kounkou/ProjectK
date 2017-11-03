@@ -24,15 +24,32 @@ Rectangle {
     property alias login     : login
     property alias password  : password
 
+    Text {
+        id: loginTitle
+        text: "Login"
+        font.pointSize: 20
+        horizontalAlignment: TextField.AlignHCenter
+
+        anchors {
+            top: parent.top
+            margins: parent.height / 4
+            horizontalCenter: parent.horizontalCenter
+        }
+    }
+
     Column {
 
-        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: loginTitle.bottom
+        anchors.topMargin: 20
+        width: window.width / 2
 
         TextField {
             id: login
             width : parent.width
             placeholderText: "login"
             font.pixelSize: 12
+            horizontalAlignment: TextField.AlignHCenter
         }
 
         TextField {
@@ -41,12 +58,14 @@ Rectangle {
             echoMode: TextInput.Password
             placeholderText: "password"
             font.pixelSize: 12
+            horizontalAlignment: TextField.AlignHCenter
         }
 
         Button {
             id: connection
             text: qsTr("Connexion")
             font.pointSize: 10
+            anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 }

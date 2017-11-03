@@ -32,6 +32,7 @@ Pane {
         anchors.centerIn: parent
         source: picture
         fillMode: Image.PreserveAspectCrop
+        asynchronous: true
 
         BusyIndicator {
             id: loadIndicator

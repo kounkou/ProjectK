@@ -36,34 +36,30 @@ namespace amz {
     }
 
     ///////////////////////////////////////////////////
-    /// FUNCTION Application::init
-    ///
-    /// DESCRIPTION
-    /// init function. The init function will download
-    /// a database of items.
-    ///
-    /// RETURN
-    /// The init status
+    /// FUNCTION Application::login
     ///////////////////////////////////////////////////
-    bool Application::init()
+    bool Application::loginUser(const QString& login, const QString& password)
     {
         LOG_ENTEREXIT;
 
-        bool status = false;
-
+        ////////////////////// BEGIN LOGIN
         // Add the database connection
         QSqlDatabase m_db = QSqlDatabase::addDatabase("QMYSQL");
         //Set relevant settings
-        m_db.setHostName("127.0.0.1");
+        m_db.setHostName("109.10.44.197");
         m_db.setDatabaseName("foo");
-        m_db.setUserName("root");
-        m_db.setPassword("azerty");
+        m_db.setUserName(login    /* "bar" */);
+        m_db.setPassword(password /* "PASSWORD" */);
 
         // Open the database
         if (!m_db.open()) {
             qWarning() << __FUNCTION__ << "Failed to open main database; aborting...";
-            status = false;
+            return false;
         }
+
+        ////////////////////// END LOGIN
+
+        ////////////////////// BEGIN RETRIEVING ITEMS
 
         // Create query string
         QString queryString("select * from tbl1");
@@ -72,7 +68,7 @@ namespace amz {
         // Check if the query has executed properly
         if (!query.exec()) {
             qWarning() << __FUNCTION__ << ":" <<__LINE__<<"Failed to fetch ids";
-            status = false;
+            return false;
         }
 
         // Here I check whether the select has returned any results and append them to the list
@@ -88,11 +84,32 @@ namespace amz {
         _filterModel.setSourceModel(&_listModel);
         _filterModel.setFilterRole(NameRole);
         _filterModel.setSortRole(NameRole);
-        _context = _engine.rootContext();
         _context->setContextProperty("filterModel", &_filterModel);
+
+        ////////////////////// END RETRIEVING ITEMS
+
+        return true;
+    }
+
+    ///////////////////////////////////////////////////
+    /// FUNCTION Application::init
+    ///
+    /// DESCRIPTION
+    /// init function. The init function will download
+    /// a database of items.
+    ///
+    /// RETURN
+    /// The init status
+    ///////////////////////////////////////////////////
+    bool Application::init()
+    {
+        LOG_ENTEREXIT;
+
+        _context = _engine.rootContext();
+        _context->setContextProperty("model", (QObject *)this);
         _engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
-        return status;
+        return true;
     }
 
     ///////////////////////////////////////////////////

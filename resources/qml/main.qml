@@ -27,9 +27,6 @@ ApplicationWindow {
     title: qsTr("ProjectK")
     color: "transparent"
 
-    SplashForm {
-    }
-
     SwipeView {
         id: swipeView
         anchors.fill: parent

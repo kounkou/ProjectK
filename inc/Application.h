@@ -14,18 +14,23 @@
 #include <QQmlApplicationEngine>
 #include "ItemsModel.h"
 #include "FilterProxyModel.h"
-class QQmlContext;
 #include <QSqlQuery>
+#include <QObject>
 
+class QQmlContext;
 class IDataProvider;
 
 namespace amz {
 
-    ///
+    /////////////////////////////////////////////////////////////////
     /// @brief CLASS Application
     ///        Application is the init class used by the application
     ///        to instanciate the application
-    class Application {
+    /////////////////////////////////////////////////////////////////
+    class Application : public QObject {
+
+        Q_OBJECT
+
     public:
         /// @brief the default constructor
         Application();
@@ -35,6 +40,9 @@ namespace amz {
 
         /// @brief It overrides the data provider
         void overrideDataprovider(std::shared_ptr<IDataProvider> dataProvider);
+
+        /// @brief login user
+        Q_INVOKABLE bool loginUser(const QString &login, const QString &password);
 
         /// @brief It inits the application by loading all QML relevants elements
         bool init();
@@ -64,6 +72,9 @@ namespace amz {
 
         /// @brief declares the filter model instance
         FilterProxyModel _filterModel;
+
+        /// @brief the database to be used
+        QSqlDatabase m_db;
     };
 }
 
