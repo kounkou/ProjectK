@@ -40,34 +40,11 @@ Item {
         target: loader.source != "" ? loader.item : null
     }
 
+    // Application screens grouped in states
     states: [
-        State {
-            name: "SPLASH"
-            PropertyChanges {
-                target: loader
-                source: "Splash.qml"
-            }
-        },
-        State {
-            name: "LOGIN"
-            PropertyChanges {
-                target: loader
-                source: "Login.qml"
-            }
-        },
-        State {
-            name: "NORMAL"
-            PropertyChanges {
-                target: loader
-                source: "ItemsNormal.qml"
-            }
-        },
-        State {
-            name: "DETAIL"
-            PropertyChanges {
-                target: loader
-                source: "ItemDetails.qml"
-            }
-        }
+        State { name: "SPLASH"; PropertyChanges { target: loader; source: "Splash.qml"      }},
+        State { name: "LOGIN";  PropertyChanges { target: loader; source: "Login.qml"       }},
+        State { name: "NORMAL"; PropertyChanges { target: loader; source: "ItemsNormal.qml" }},
+        State { name: "DETAIL"; PropertyChanges { target: loader; source: "ItemDetails.qml" }}
     ]
 }
