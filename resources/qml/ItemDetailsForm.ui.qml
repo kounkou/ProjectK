@@ -36,7 +36,7 @@ Pane {
                 Text {
                     id: messageBox
                     width: description.width
-                    text: "I would like to put text inside a bubble, and I want that my bubble be equal to the text width, but if the text length is too long, I would like the text to wrap automatically and be equal to the parent width.This code works but the text is not wrapping if text is too long:"
+                    text: stateManager.currentBrief
                     wrapMode: "WordWrap"
                     font.pointSize: 14
                     opacity: 0.7

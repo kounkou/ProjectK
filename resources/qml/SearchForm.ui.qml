@@ -52,7 +52,6 @@ Rectangle {
 
     TextInput {
         id: input
-        focus: true
         anchors { left: prefix.right; right: parent.right; top: parent.top; bottom: parent.bottom }
         verticalAlignment: Text.AlignVCenter
         font.pixelSize: 18
