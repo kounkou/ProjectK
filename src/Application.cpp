@@ -46,10 +46,10 @@ namespace amz {
         // Add the database connection
         QSqlDatabase m_db = QSqlDatabase::addDatabase("QMYSQL");
         //Set relevant settings
-        m_db.setHostName("127.0.0.1" /* "109.10.44.197" */);
+        m_db.setHostName("127.0.0.1");
         m_db.setDatabaseName("foo");
-        m_db.setUserName("root" /* login    /*\ "bar" */);
-        m_db.setPassword("azerty" /* password /*\ "PASSWORD" */);
+        m_db.setUserName(login);
+        m_db.setPassword(password;
 
         // Open the database
         if (!m_db.open()) {
