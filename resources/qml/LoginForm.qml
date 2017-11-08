@@ -23,6 +23,7 @@ Rectangle {
     property alias connection: connection
     property alias login     : login
     property alias password  : password
+    property alias messageVis: connectionMessage.visible
 
     Text {
         id: loginTitle
@@ -43,12 +44,13 @@ Rectangle {
         anchors.top: loginTitle.bottom
         anchors.topMargin: 20
         width: window.width / 2
+        spacing: 10
 
         TextField {
             id: login
             width : parent.width
             placeholderText: "login"
-            font.pixelSize: 12
+            font.pointSize: 12
             horizontalAlignment: TextField.AlignHCenter
         }
 
@@ -57,15 +59,32 @@ Rectangle {
             width : parent.width
             echoMode: TextInput.Password
             placeholderText: "password"
-            font.pixelSize: 12
+            font.pointSize: 12
             horizontalAlignment: TextField.AlignHCenter
-        }
+        }               
 
         Button {
             id: connection
             text: qsTr("Connexion")
             font.pointSize: 10
             anchors.horizontalCenter: parent.horizontalCenter
+        }
+
+        Rectangle {
+            id: connectionMessage
+            width: parent.width
+            height: message.height
+            visible: false
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Text {
+                id: message
+                anchors.centerIn: parent
+                text: "Login incorrect, please try again"
+                color: "red"
+                font.bold: true
+                font.pointSize: 12
+            }
         }
     }
 }

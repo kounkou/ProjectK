@@ -29,6 +29,7 @@ LoginForm {
         if (connectionStatus) {
             stateManager.state = "NORMAL"
         } else {
+            messageVis = true
             stateManager.state = "LOGIN"
         }
     }
